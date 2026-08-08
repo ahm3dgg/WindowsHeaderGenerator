@@ -159,7 +159,8 @@ def write_header_file(filename: str, types: Iterable[Type]) -> None:
             f.write(f"typedef {t.kind.value} {t.name} {t.name};\n")
 
         for t in types:
-            f.write(f"\n\n{t.declaration}")
+            decl = t.declaration.replace('unionvolatile', 'volatile union')
+            f.write(f"\n\n{decl}")
 
 
 def main():
